@@ -2,11 +2,14 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import PosterApp from './PosterApp.jsx'
 import { BrowserRouter } from 'react-router-dom'
+import { UserProvider } from './context/UserProvider'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
-      <PosterApp />
+      <UserProvider>
+        <PosterApp />
+      </UserProvider>
     </BrowserRouter>
   </React.StrictMode>
 )

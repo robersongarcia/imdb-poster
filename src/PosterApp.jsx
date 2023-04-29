@@ -1,9 +1,8 @@
+import { AppRouter } from './router/AppRouter'
 
 function PosterApp () {
   return (
-    <>
-      <h1>IMDb Poster PosterApp </h1>
-    </>
+    <AppRouter/>
   )
 }
 

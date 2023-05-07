@@ -1,19 +1,20 @@
+import { useReducer } from 'react'
 import { UserContext } from './UserContext'
-import { useState } from 'react'
+import { UserReducer } from './UserReducer'
 
 const initialState = {
-  uid: '',
-  email: '',
-  movies: '',
-  status: '',
-  errorMessage: ''
+  uid: null,
+  email: null,
+  movies: null,
+  status: 'checking', // checking, authenticated, not-authenticated
+  errorMessage: null
 }
 
 export const UserProvider = ({ children }) => {
-  const [user, setUser] = useState(initialState)
+  const [state, dispatch] = useReducer(UserReducer, initialState)
 
   return (
-    <UserContext.Provider value={{ user, setUser }}>
+    <UserContext.Provider value={{ ...state, state, dispatch }}>
         {children}
     </UserContext.Provider>
   )

@@ -4,6 +4,8 @@ import PosterApp from './PosterApp.jsx'
 import { BrowserRouter } from 'react-router-dom'
 import { UserProvider } from './context/UserProvider'
 
+import './main.css'
+
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>

@@ -117,7 +117,7 @@ export function LoginPage () {
                 }
               }>
               <Typography sx={{
-                fontSize: '0.6rem',
+                fontSize: '0.7rem',
                 fontFamily: 'Helvetica',
                 fontWeight: 'bold',
                 color: '#333',
@@ -126,7 +126,7 @@ export function LoginPage () {
               }} gutterBottom>
                 if you don&apos;t have an account, please <Link to="/signup">sign up</Link>
               </Typography>
-              </Grid>
+            </Grid>
         </Grid>
       </Grid>
     </Grid>

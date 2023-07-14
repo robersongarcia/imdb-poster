@@ -1,8 +1,11 @@
-import { Grid, TextField, Button } from '@mui/material'
+import { Grid, TextField, Button, Avatar, Typography } from '@mui/material'
 import { useState, useContext } from 'react'
 import { useForm } from './../../hooks/useForm'
 import { startSignUpWithEmailAndPass } from '../../context/Async'
 import { UserContext } from '../../context/UserContext'
+
+import './auth.css'
+import { Link } from 'react-router-dom'
 
 const formData = {
   email: '',
@@ -30,52 +33,106 @@ export function SignUpPage () {
   }
 
   return (
-    <Grid container>
-      <Grid item xs={12} sx={{
+    <Grid container flex justifyContent={'center'}>
+      <div className='background-form'></div>
+      <Grid item xs={11} sm={6} md={4} sx={{
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
         flexDirection: 'column',
         height: '100vh'
       }}>
-        <h1>SignUp Page Temporal</h1>
-        <form onSubmit={onSubmit}>
-          <Grid container direction='column' alignItems='center' justifyContent='center'>
-          <TextField
-            name='email'
-            label='Email'
-            type='email'
-            variant='outlined'
-            margin='normal'
-            fullWidth
-            value={email}
-            onChange={onInputChange}
-            error={!!emailValid && formSubmitted}
-            helperText={emailValid}
-          />
-          <TextField
-            name='password'
-            label='Password'
-            type='password'
-            variant='outlined'
-            margin='normal'
-            fullWidth
-            value={password}
-            onChange={onInputChange}
-            error={!!passwordValid && formSubmitted}
-            helperText={passwordValid}
-          />
-          <Grid container direction='row' justifyContent='center'>
-          <Button
-            type='submit'
-            variant='contained'
-            color='primary'
-          >
-            SignUp!!
-          </Button>
-          </Grid>
-          </Grid>
-        </form>
+        <Grid item sx={
+          {
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            flexDirection: 'column',
+            backgroundColor: 'white',
+            padding: '1rem',
+            borderRadius: '1rem',
+            boxShadow: '0 0 10px rgba(0,0,0,0.5)',
+            border: '1px solid #ccc',
+            width: '100%'
+
+          }
+        }>
+          <Avatar
+              alt='IMDb Logo'
+              src='/imdb-logo.png'
+              variant='rounded'
+              sx={{
+                width: '6rem',
+                height: '6rem',
+                border: '1px solid #ccc'
+              }}
+            />
+            <Typography sx={{
+              fontSize: '1.5rem',
+              fontFamily: 'Helvetica',
+              fontWeight: 'bold',
+              color: '#333',
+              marginTop: '1rem'
+            }} gutterBottom>
+              IMDb Posters
+            </Typography>
+            <form onSubmit={onSubmit} style={{
+              width: '90%'
+            }}>
+              <Grid container direction='column' alignItems='center' justifyContent='center' marginTop={3} gap={2}>
+              <TextField
+                name='email'
+                label='Email'
+                type='email'
+                variant='outlined'
+                margin='none'
+                fullWidth
+                value={email}
+                onChange={onInputChange}
+                error={!!emailValid && formSubmitted}
+                helperText={formSubmitted && emailValid}
+              />
+              <TextField
+                name='password'
+                label='Password'
+                type='password'
+                variant='outlined'
+                margin='none'
+                fullWidth
+                value={password}
+                onChange={onInputChange}
+                error={!!passwordValid && formSubmitted}
+                helperText={formSubmitted && passwordValid}
+              />
+              <Grid container direction='column' justifyContent='center'>
+              <Button
+                type='submit'
+                variant='contained'
+                color='primary'
+              >
+                Sign Up
+              </Button>
+              </Grid>
+              </Grid>
+            </form>
+            <Grid item sx={
+                {
+                  width: '90%'
+                }
+              }>
+              <Typography sx={{
+                fontSize: '0.7rem',
+                fontFamily: 'Helvetica',
+                fontWeight: 'bold',
+                color: '#333',
+                textAlign: 'right',
+                mt: 3
+              }} gutterBottom>
+                if you have an account <Link to="/login">login</Link>
+              </Typography>
+            </Grid>
+        </Grid>
+
       </Grid>
     </Grid>
   )

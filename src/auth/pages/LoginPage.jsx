@@ -93,7 +93,7 @@ export function LoginPage () {
                 value={password}
                 onChange={onInputChange}
               />
-              <Grid container direction='column' gap={1}>
+              <Grid container direction='column' gap={1} mb={1}>
                 <Button
                   type='submit'
                   variant='contained'
@@ -111,22 +111,22 @@ export function LoginPage () {
               </Grid>
               </Grid>
             </form>
-            <Grid item sx={
-                {
-                  width: '90%'
-                }
-              }>
-              <Typography sx={{
-                fontSize: '0.7rem',
-                fontFamily: 'Helvetica',
-                fontWeight: 'bold',
-                color: '#333',
-                textAlign: 'right',
-                mt: 3
-              }} gutterBottom>
-                if you don&apos;t have an account, please <Link to="/signup">sign up</Link>
-              </Typography>
-            </Grid>
+        </Grid>
+        <Grid item sx={
+                  {
+                    width: '100%'
+                  }
+                }>
+                <Typography sx={{
+                  fontSize: '1rem',
+                  fontFamily: 'Helvetica',
+                  fontWeight: 'bold',
+                  color: '#333',
+                  textAlign: 'center',
+                  mt: 3
+                }} gutterBottom>
+                  Don&apos;t have an account<br/><Link to="/signup">Sign Up</Link>
+                </Typography>
         </Grid>
       </Grid>
     </Grid>

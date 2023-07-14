@@ -104,7 +104,7 @@ export function SignUpPage () {
                 error={!!passwordValid && formSubmitted}
                 helperText={formSubmitted && passwordValid}
               />
-              <Grid container direction='column' justifyContent='center'>
+              <Grid container direction='column' justifyContent='center' mb={1}>
               <Button
                 type='submit'
                 variant='contained'
@@ -115,24 +115,23 @@ export function SignUpPage () {
               </Grid>
               </Grid>
             </form>
-            <Grid item sx={
-                {
-                  width: '90%'
-                }
-              }>
-              <Typography sx={{
-                fontSize: '0.7rem',
-                fontFamily: 'Helvetica',
-                fontWeight: 'bold',
-                color: '#333',
-                textAlign: 'right',
-                mt: 3
-              }} gutterBottom>
-                if you have an account <Link to="/login">login</Link>
-              </Typography>
-            </Grid>
         </Grid>
-
+        <Grid item sx={
+                  {
+                    width: '100%'
+                  }
+                }>
+                <Typography sx={{
+                  fontSize: '1rem',
+                  fontFamily: 'Helvetica',
+                  fontWeight: 'bold',
+                  color: '#333',
+                  textAlign: 'center',
+                  mt: 3
+                }} gutterBottom>
+                  If have an account<br/><Link to="/signup">Login</Link>
+                </Typography>
+        </Grid>
       </Grid>
     </Grid>
   )

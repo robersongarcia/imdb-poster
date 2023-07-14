@@ -3,11 +3,12 @@ import { PosterPage } from './../poster/pages/PosterPage'
 import { LoginPage } from './../auth/pages/LoginPage'
 import { SignUpPage } from './../auth/pages/SignUpPage'
 import { useCheckAuth } from '../hooks/useCheckAuth'
+import { Loading } from '../ui/Loading'
 
 export function AppRouter () {
   const { status } = useCheckAuth()
 
-  if (status === 'checking') return <h1>Loading...</h1>
+  if (status === 'checking') return <Loading/>
 
   return (
     <Routes>

@@ -1,3 +1,8 @@
 body {
     margin: 0;
 }
+
+.posterMain-background {
+    background: rgb(166,225,250);
+    background: linear-gradient(0deg, rgba(166,225,250,1) 0%, rgba(14,107,168,1) 87%);
+}

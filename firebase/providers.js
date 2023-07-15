@@ -1,11 +1,21 @@
 import { GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth'
-import { FirebaseAuth } from './config'
+import { FirebaseAuth, FirebaseDB } from './config'
+import { doc, getDoc, setDoc } from 'firebase/firestore/lite'
 
 export const signUpUserWithEmailAndPass = async (email, password) => {
   try {
     const resp = await createUserWithEmailAndPassword(FirebaseAuth, email, password)
 
     const { uid } = resp.user
+
+    const { ok, msg } = await createUserInDb(uid, email)
+
+    if (!ok) {
+      return {
+        ok: false,
+        msg
+      }
+    }
 
     return {
       ok: true,
@@ -66,4 +76,64 @@ export const loginWithEmailPassword = async (email, password) => {
 
 export const logoutFirebase = async () => {
   return await FirebaseAuth.signOut()
+}
+
+export const createUserInDb = async (uid, email) => {
+  try {
+    await setDoc(doc(FirebaseDB, 'users', uid), {
+      email,
+      movies: []
+    })
+
+    return {
+      ok: true,
+      msg: 'User created in DB'
+    }
+  } catch (error) {
+    console.log(error)
+    return {
+      ok: false,
+      msg: error.message
+    }
+  }
+}
+
+export const getMovies = async (uid, google = false, email = '') => {
+  try {
+    const docSnap = await getDoc(doc(FirebaseDB, 'users', uid))
+
+    if (docSnap.exists()) {
+      console.log('Document data:', docSnap.data())
+      return {
+        ok: true,
+        movies: docSnap.data().movies
+      }
+    } else {
+      // docSnap.data() will be undefined in this case
+      if (google) {
+        const { ok, msg } = await createUserInDb(uid, email)
+        if (!ok) {
+          return {
+            ok: false,
+            msg
+          }
+        }
+        return {
+          ok: true,
+          movies: []
+        }
+      }
+      console.log('No such document!')
+      return {
+        ok: false,
+        movies: []
+      }
+    }
+  } catch (error) {
+    console.log(error)
+    return {
+      ok: false,
+      msg: error.message
+    }
+  }
 }

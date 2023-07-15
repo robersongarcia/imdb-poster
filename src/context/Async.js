@@ -1,4 +1,4 @@
-import { loginWithEmailPassword, logoutFirebase, signInWithGoogle, signUpUserWithEmailAndPass } from '../../firebase/providers'
+import { getMovies, loginWithEmailPassword, logoutFirebase, signInWithGoogle, signUpUserWithEmailAndPass } from '../../firebase/providers'
 
 export const startSignUpWithEmailAndPass = async (email, password, dispatch) => {
   dispatch({ type: 'checkingCredentials' })
@@ -21,19 +21,24 @@ export const startSignInWithGoogle = async (dispatch) => {
   }
 
   //! TODO - check user movies in DB
+  const { ok, movies } = await getMovies(result.uid, true, result.email)
+  if (!ok) return dispatch({ type: 'logout', payload: 'no movies doc' })
 
-  dispatch({ type: 'login', payload: { uid: result.uid, email: result.email, movies: [] } })
+  dispatch({ type: 'login', payload: { uid: result.uid, email: result.email, movies } })
 }
 
 export const startSignInWithEmailAndPass = async (email, password, dispatch) => {
   dispatch({ type: 'checkingCredentials' })
 
-  const { ok, uid, msg } = await loginWithEmailPassword(email, password)
+  const { ok: ok1, uid, msg } = await loginWithEmailPassword(email, password)
 
-  if (!ok) return dispatch({ type: 'logout', payload: msg })
+  if (!ok1) return dispatch({ type: 'logout', payload: msg })
 
   //! TODO - check user movies in DB
-  return dispatch({ type: 'login', payload: { uid, email, movies: [] } })
+  const { ok, movies } = await getMovies(uid)
+  if (!ok) return dispatch({ type: 'logout', payload: 'no movies doc' })
+
+  return dispatch({ type: 'login', payload: { uid, email, movies } })
 }
 
 export const startLoguot = async (dispatch) => {

@@ -50,6 +50,10 @@ BootstrapDialogTitle.propTypes = {
 }
 
 export default function CardDialog ({ open, handleClose, movie }) {
+  const handleViewed = () => {
+    console.log('viewed')
+  }
+
   return (
     <>
       <BootstrapDialog
@@ -62,16 +66,19 @@ export default function CardDialog ({ open, handleClose, movie }) {
         </BootstrapDialogTitle>
         <DialogContent dividers>
           <Typography gutterBottom>
-            {movie.Plot}
+            <span style={{ fontWeight: 'bold' }}>Synopsis: </span>{movie.Plot}
           </Typography>
           <Typography gutterBottom>
-            {movie.Actors}
+            <span style={{ fontWeight: 'bold' }}>Cast: </span>{movie.Actors}
           </Typography>
           <Typography gutterBottom>
-            {movie.Runtime}, {movie.Year}, {movie.imdbRating}
+          <span style={{ fontWeight: 'bold' }}>Duration: </span>{movie.Runtime}<br/><span style={{ fontWeight: 'bold' }}>Year: </span>{movie.Year} <br/><span style={{ fontWeight: 'bold' }}>Rating: </span> {movie.imdbRating}
           </Typography>
         </DialogContent>
-        <DialogActions>
+        <DialogActions >
+          <Button onClick={() => handleViewed(movie.imdbID)} color='success'>
+            Mark as viewed
+          </Button>
           <Button autoFocus onClick={handleClose}>
             Close
           </Button>

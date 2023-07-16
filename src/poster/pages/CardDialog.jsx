@@ -70,9 +70,10 @@ export default function CardDialog ({ open, handleClose, movie }) {
           </Typography>
           <Typography gutterBottom>
             <span style={{ fontWeight: 'bold' }}>Cast: </span>{movie.Actors}
-          </Typography>
-          <Typography gutterBottom>
-          <span style={{ fontWeight: 'bold' }}>Duration: </span>{movie.Runtime}<br/><span style={{ fontWeight: 'bold' }}>Year: </span>{movie.Year} <br/><span style={{ fontWeight: 'bold' }}>Rating: </span> {movie.imdbRating}
+            <br />
+            <span style={{ fontWeight: 'bold' }}>Director: </span>{movie.Director}
+            <br />
+            <span style={{ fontWeight: 'bold' }}>Duration: </span>{movie.Runtime}<br/><span style={{ fontWeight: 'bold' }}>Year: </span>{movie.Year} <br/><span style={{ fontWeight: 'bold' }}>Rating: </span> {movie.imdbRating}
           </Typography>
         </DialogContent>
         <DialogActions >

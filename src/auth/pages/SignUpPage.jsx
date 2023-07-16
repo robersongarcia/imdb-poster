@@ -129,7 +129,7 @@ export function SignUpPage () {
                   textAlign: 'center',
                   mt: 3
                 }} gutterBottom>
-                  If have an account<br/><Link to="/signup">Login</Link>
+                  If have an account<br/><Link to="/login">Login</Link>
                 </Typography>
         </Grid>
       </Grid>

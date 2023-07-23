@@ -32,34 +32,42 @@ export function PosterPage () {
     <Paper sx={{
       height: '100%',
       display: 'flex',
-      direction: 'column'
-    }} className='posterMain-background'>
-      <Container>
-          <Grid item xs={12} mt={3} sx={{
-            display: 'flex',
-            justifyContent: 'space-around'
-          }}>
+      direction: 'column',
+      backgroundColor: '#F1F3F4'
+    }}>
+      <Grid container>
+          <Grid item sx={
+            {
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center',
+              width: '100%',
+              mt: 3
+            }
+          }>
             <Typography
-              sx={
-                {
-                  fontSize: '1.5rem',
-                  fontWeight: 'bold',
-                  color: '#fff',
-                  textShadow: '-0.7px 0.7px 0 #000,0.7px 0.7px 0 #000,0.7px -0.7px 0 #000,-0.7px -0.7px 0 #000',
-                  display: 'inline-block'
-                }
-              }
-            >TOP 100 Movies List</Typography>
-            <Button onClick={logout} sx={{
-              color: '#04151F'
-            }}>Logout</Button>
+              sx={{
+                fontSize: '2.5rem',
+                fontWeight: '250',
+                textAlign: 'center',
+                lineHeight: '1.2'
+              }}
+            >TOP 100 MOVIES BUCKET LIST</Typography>
+            <Typography>THE HIGUEST RATED <span style={{
+              fontWeight: 'bold'
+            }}>IMDb</span> CROWD FAVORITES</Typography>
           </Grid>
           <Grid item xs={12} sx={{
             display: 'flex',
-            justifyContent: 'space-around',
+            justifyContent: 'space-evenly',
             direction: 'row',
             flexWrap: 'wrap',
-            mt: 3
+            mt: 3,
+            mb: 3,
+            gap: 1,
+            ml: 2,
+            mr: 2
           }}>
             {
               dataMovies.map((movie, index) => (
@@ -67,7 +75,7 @@ export function PosterPage () {
               ))
             }
           </Grid>
-      </Container>
+      </Grid>
     </Paper>
   )
 }

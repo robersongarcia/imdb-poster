@@ -31,11 +31,14 @@ export default function MovieCard ({ movie, index }) {
             <MoreVertIcon />
           </IconButton>
         }
-        title="Viewed"
-        subheader="Date of view"
+        title={`${index + 1}. Not Viewed`}
         // sx={{
         //   backgroundColor: 'green'
         // }}
+        titleTypographyProps={{
+          fontSize: '1.2rem',
+          fontWeight: '300'
+        }}
       />
       <CardMedia
         component="img"
@@ -43,16 +46,6 @@ export default function MovieCard ({ movie, index }) {
         alt={movie.Title}
         height={300}
       />
-      <CardContent sx={{
-        height: '20%'
-      }}>
-        <Typography color="black" sx={{
-          fontSize: '1rem',
-          fontWeight: 'bold'
-        }}>
-            {index + 1}{'. '}{movie.Title}
-        </Typography>
-      </CardContent>
     </Card>
     <CardDialog movie={movie} handleClose={handleClose} open={open}/>
     </>

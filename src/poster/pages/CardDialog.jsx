@@ -8,6 +8,7 @@ import DialogActions from '@mui/material/DialogActions'
 import IconButton from '@mui/material/IconButton'
 import CloseIcon from '@mui/icons-material/Close'
 import Typography from '@mui/material/Typography'
+import { Box } from '@mui/material'
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
@@ -33,7 +34,7 @@ function BootstrapDialogTitle (props) {
             position: 'absolute',
             right: 8,
             top: 8,
-            color: (theme) => theme.palette.grey[500]
+            color: 'black'
           }}
         >
           <CloseIcon />
@@ -61,19 +62,47 @@ export default function CardDialog ({ open, handleClose, movie }) {
         aria-labelledby="customized-dialog-title"
         open={open}
       >
-        <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
-          {movie.Title}
+        <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose} sx={
+          {
+            backgroundColor: '#F1F3F4'
+          }
+        }>
+          <Box sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}>
+            <img src={movie.Poster} alt={movie.Title} style={{
+              boxShadow: '0px 0px 10px 0px rgba(0,0,0,0.75)',
+              borderRadius: '7px'
+            }}/>
+            <Typography gutterBottom variant="h5" component="div" sx={{
+              mt: 2,
+              fontWeight: '400'
+            }}>
+              {movie.Title}
+            </Typography>
+          </Box>
         </BootstrapDialogTitle>
-        <DialogContent dividers>
-          <Typography gutterBottom>
-            <span style={{ fontWeight: 'bold' }}>Synopsis: </span>{movie.Plot}
+        <DialogContent dividers sx={{
+          backgroundColor: '#F1F3F4'
+        }}>
+          <Typography sx={{
+            mb: 2
+          }}
+            variant='body1'
+          >
+            <span style={{ fontWeight: '600', fontSize: '1.2rem' }}>Synopsis: </span>{movie.Plot}
           </Typography>
-          <Typography gutterBottom>
-            <span style={{ fontWeight: 'bold' }}>Cast: </span>{movie.Actors}
+          <Typography>
+            <span style={{ fontWeight: '600', fontSize: '1.2rem' }}>Cast: </span>{movie.Actors}
             <br />
-            <span style={{ fontWeight: 'bold' }}>Director: </span>{movie.Director}
+            <span style={{ fontWeight: '600', fontSize: '1.2rem' }}>Director: </span>{movie.Director}
             <br />
-            <span style={{ fontWeight: 'bold' }}>Duration: </span>{movie.Runtime}<br/><span style={{ fontWeight: 'bold' }}>Year: </span>{movie.Year} <br/><span style={{ fontWeight: 'bold' }}>Rating: </span> {movie.imdbRating}
+            <span style={{ fontWeight: '600', fontSize: '1.2rem' }}>Duration: </span>{movie.Runtime}<br/><span style={{ fontWeight: '600', fontSize: '1.2rem' }}>Year: </span>{movie.Year} <br/><span style={{ fontWeight: '600', fontSize: '1.2rem' }}>Rating: </span> <span style={{
+              fontWeight: '400', fontSize: '1rem'
+            }}>{movie.imdbRating}</span>
           </Typography>
         </DialogContent>
         <DialogActions >

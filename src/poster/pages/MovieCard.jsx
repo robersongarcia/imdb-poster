@@ -1,18 +1,12 @@
 import Card from '@mui/material/Card'
 import CardHeader from '@mui/material/CardHeader'
 import CardMedia from '@mui/material/CardMedia'
-import CardContent from '@mui/material/CardContent'
-import CardActions from '@mui/material/CardActions'
 import IconButton from '@mui/material/IconButton'
-import FavoriteIcon from '@mui/icons-material/Favorite'
-import ShareIcon from '@mui/icons-material/Share'
-import { Check, More } from '@mui/icons-material'
-import { Box, Grid, Typography } from '@mui/material'
 import MoreVertIcon from '@mui/icons-material/MoreVert'
 import CardDialog from './CardDialog'
 import { useState } from 'react'
 
-export default function MovieCard ({ movie, index }) {
+export default function MovieCard ({ movie, index, userMovies }) {
   const [open, setOpen] = useState(false)
 
   const handleClickOpen = () => {

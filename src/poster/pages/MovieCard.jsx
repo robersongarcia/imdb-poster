@@ -31,7 +31,8 @@ export default function MovieCard ({ movie, index }) {
             <MoreVertIcon />
           </IconButton>
         }
-        title={`${index + 1}. Not Viewed`}
+        title={`${index + 1}. Viewed    ✔️`}
+        // title={`${index + 1}. Not Viewed    ❌`}
         // sx={{
         //   backgroundColor: 'green'
         // }}

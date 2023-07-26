@@ -7,6 +7,8 @@ import { useForm } from '../../hooks/useForm'
 
 import './auth.css'
 import { Link } from 'react-router-dom'
+import { Footer } from '../../ui/Footer'
+import { useSnackbar } from 'notistack'
 
 const formData = {
   email: '',
@@ -15,13 +17,32 @@ const formData = {
 
 export function LoginPage () {
   const { dispatch } = useContext(UserContext)
-
   const { email, password, onInputChange } = useForm(formData)
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar()
 
-  const onSubmit = (event) => {
+  const onSubmit = async (event) => {
     event.preventDefault()
-
-    startSignInWithEmailAndPass(email, password, dispatch)
+    const resp = await startSignInWithEmailAndPass(email, password, dispatch, enqueueSnackbar, closeSnackbar)
+    console.log(resp)
+    // enqueueSnackbar('message', {
+    //   variant: 'success',
+    //   anchorOrigin: {
+    //     vertical: 'top',
+    //     horizontal: 'center'
+    //   },
+    //   autoHideDuration: 3000
+    // })
+    // enqueueSnackbar('message', {
+    //   variant: 'error',
+    //   anchorOrigin: {
+    //     vertical: 'top',
+    //     horizontal: 'center'
+    //   },
+    //   autoHideDuration: 3000,
+    //   action: (key) => (
+    //     <Button sx={{ color: 'white' }} onClick={() => closeSnackbar(key)}>Dismiss</Button>
+    //   )
+    // })
   }
 
   return (
@@ -102,7 +123,7 @@ export function LoginPage () {
                 <Button
                   variant='contained'
                   color='primary'
-                  onClick={() => startSignInWithGoogle(dispatch)}
+                  onClick={() => startSignInWithGoogle(dispatch, enqueueSnackbar, closeSnackbar)}
                 >
                 <Google /> Google
                 </Button>
@@ -126,6 +147,7 @@ export function LoginPage () {
                   Don&apos;t have an account<br/><Link to="/signup">Sign Up</Link>
                 </Typography>
         </Grid>
+        <Footer />
       </Grid>
     </Grid>
   )

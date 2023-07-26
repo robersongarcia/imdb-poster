@@ -13,6 +13,7 @@ import { useContext, useState } from 'react'
 import { UserContext } from '../../context/UserContext'
 import { addMovie, removeMovie } from '../../../firebase/providers'
 import { Loading } from '../../ui/Loading'
+import { useSnackbar } from 'notistack'
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
@@ -57,6 +58,7 @@ BootstrapDialogTitle.propTypes = {
 export default function CardDialog ({ open, handleClose, movie, setTrigger, viewed }) {
   const { uid, dispatch } = useContext(UserContext)
   const [disable, setDisable] = useState(false)
+  const { enqueueSnackbar } = useSnackbar()
 
   const handleViewed = async () => {
     setDisable(true)
@@ -67,11 +69,27 @@ export default function CardDialog ({ open, handleClose, movie, setTrigger, view
         console.log(msg)
         setDisable(false)
         handleClose()
+        enqueueSnackbar('Error on marking movie', {
+          variant: 'error',
+          anchorOrigin: {
+            vertical: 'top',
+            horizontal: 'center'
+          },
+          autoHideDuration: 2000
+        })
         return
       }
       dispatch({ type: 'loadMovies', payload: { result } })
       setDisable(false)
       setTrigger(true)
+      enqueueSnackbar('Movie marked as viewed', {
+        variant: 'success',
+        anchorOrigin: {
+          vertical: 'top',
+          horizontal: 'center'
+        },
+        autoHideDuration: 2000
+      })
       handleClose()
       return
     }
@@ -82,11 +100,27 @@ export default function CardDialog ({ open, handleClose, movie, setTrigger, view
       console.log(msg)
       setDisable(false)
       handleClose()
+      enqueueSnackbar('Error on removing movie', {
+        variant: 'error',
+        anchorOrigin: {
+          vertical: 'top',
+          horizontal: 'center'
+        },
+        autoHideDuration: 2000
+      })
       return
     }
     dispatch({ type: 'loadMovies', payload: { movies } })
     setDisable(false)
     setTrigger(true)
+    enqueueSnackbar('Movie marked as not viewed', {
+      variant: 'success',
+      anchorOrigin: {
+        vertical: 'top',
+        horizontal: 'center'
+      },
+      autoHideDuration: 2000
+    })
     handleClose()
   }
 

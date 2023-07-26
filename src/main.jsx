@@ -6,15 +6,18 @@ import { UserProvider } from './context/UserProvider'
 
 import './main.css'
 import { AppTheme } from './theme/AppThemeProvider.jsx'
+import { SnackbarProvider } from 'notistack'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   // <React.StrictMode>
   <AppTheme>
+    <SnackbarProvider>
     <BrowserRouter>
       <UserProvider>
         <PosterApp />
       </UserProvider>
     </BrowserRouter>
+    </SnackbarProvider>
   </AppTheme>
   // </React.StrictMode>
 )

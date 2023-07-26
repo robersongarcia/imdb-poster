@@ -6,6 +6,8 @@ import { UserContext } from '../../context/UserContext'
 
 import './auth.css'
 import { Link } from 'react-router-dom'
+import { Footer } from '../../ui/Footer'
+import { useSnackbar } from 'notistack'
 
 const formData = {
   email: '',
@@ -19,6 +21,7 @@ const formValidations = {
 
 export function SignUpPage () {
   const { dispatch } = useContext(UserContext)
+  const { closeSnackbar, enqueueSnackbar } = useSnackbar()
 
   const [formSubmitted, setFormSubmitted] = useState(false)
   const { isFormValid, onInputChange, emailValid, passwordValid, email, password } = useForm(formData, formValidations)
@@ -29,7 +32,7 @@ export function SignUpPage () {
 
     if (!isFormValid) return
 
-    startSignUpWithEmailAndPass(email, password, dispatch)
+    startSignUpWithEmailAndPass(email, password, dispatch, enqueueSnackbar, closeSnackbar)
   }
 
   return (
@@ -130,6 +133,7 @@ export function SignUpPage () {
                   If have an account<br/><Link to="/login">Login</Link>
                 </Typography>
         </Grid>
+        <Footer/>
       </Grid>
     </Grid>
   )

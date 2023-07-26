@@ -6,8 +6,8 @@ import { startLoadingMovies, startLoguot } from '../../context/Async'
 // import data from '../../data/movies_id.json'
 import dataMovies from '../../data/movies_data.json'
 import '../../main.css'
-import MovieCard from './MovieCard'
-import { Logout } from '@mui/icons-material'
+import MovieCard from '../components/MovieCard'
+import { GitHub, Logout } from '@mui/icons-material'
 
 export function PosterPage () {
   const { dispatch, movies, uid } = useContext(UserContext)
@@ -84,14 +84,13 @@ export function PosterPage () {
             }
           </Grid>
           <Grid item sx={{
-            ml: 3,
             mb: 3,
-            mt: 3
+            mt: 3,
+            width: '100%',
+            display: 'flex',
+            justifyContent: 'center'
           }}>
             <Button color='error'
-                sx={{
-                  alignSelf: 'flex-end'
-                }}
                 onClick={logout}
               >
                 <Logout/>
@@ -101,6 +100,33 @@ export function PosterPage () {
                   lineHeight: '1.2'
                 }}>LOGOUT</Typography></Button>
           </Grid>
+        <Grid item
+          sx={{
+            width: '100%',
+            position: 'relative',
+            bottom: '0'
+          }}
+        >
+          <Typography sx={{
+            fontSize: '1rem',
+            fontFamily: 'Helvetica',
+            fontWeight: 'bold',
+            color: '#333',
+            textAlign: 'center',
+            mb: 2
+          }} gutterBottom>
+            <a href='https://github.com/robersongarcia' target='_blank' style={
+              {
+                textDecoration: 'none',
+                color: '#333',
+                fontSize: '1rem',
+                textAlign: 'center'
+              }
+            } rel="noreferrer">made by @robersongarcia <GitHub sx={{
+              fontSize: '1rem'
+            }}/></a>
+          </Typography>
+        </Grid>
       </Grid>
     </Paper>
   )

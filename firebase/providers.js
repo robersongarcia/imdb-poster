@@ -177,3 +177,43 @@ export const addMovie = async (uid, movieId) => {
     }
   }
 }
+
+export const removeMovie = async (uid, movieId) => {
+  try {
+    const { ok, movies } = await getMovies(uid)
+
+    if (!ok) {
+      return {
+        ok: false,
+        msg: 'Error getting movies'
+      }
+    }
+
+    const movieIndex = movies.findIndex(movie => movie.movieId === movieId)
+
+    if (movieIndex === -1) {
+      return {
+        ok: false,
+        msg: 'Movie not found'
+      }
+    }
+
+    movies.splice(movieIndex, 1)
+
+    await setDoc(doc(FirebaseDB, 'users', uid), {
+      movies
+    }, { merge: true })
+
+    return {
+      ok: true,
+      msg: 'Movie removed',
+      movies
+    }
+  } catch (error) {
+    console.log(error)
+    return {
+      ok: false,
+      msg: error.message
+    }
+  }
+}

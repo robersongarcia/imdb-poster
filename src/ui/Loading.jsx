@@ -7,7 +7,8 @@ export const Loading = () => {
         position: 'absolute', // put at the center of the page
         top: '50%',
         left: '50%',
-        transform: 'translate(-50%, -50%)'
+        transform: 'translate(-50%, -50%)',
+        zIndex: 100000
       }
     }>
       <CircularProgress />

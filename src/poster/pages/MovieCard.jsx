@@ -13,8 +13,12 @@ export default function MovieCard ({ movie, index, userMovies, setTrigger }) {
   useEffect(() => {
     if (userMovies) {
       for (let i = 0; i < userMovies.length; i++) {
-        if (userMovies[i].movieId === movie.imdbID) { setViewed(true) }
+        if (userMovies[i].movieId === movie.imdbID) {
+          setViewed(true)
+          return
+        }
       }
+      setViewed(false)
     }
   }, [userMovies, movie.imdbID])
 
@@ -57,7 +61,7 @@ export default function MovieCard ({ movie, index, userMovies, setTrigger }) {
         height={300}
       />
     </Card>
-    <CardDialog movie={movie} handleClose={handleClose} open={open} setTrigger={setTrigger}/>
+    <CardDialog movie={movie} handleClose={handleClose} open={open} setTrigger={setTrigger} viewed={viewed}/>
     </>
   )
 }

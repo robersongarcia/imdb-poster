@@ -9,9 +9,10 @@ import IconButton from '@mui/material/IconButton'
 import CloseIcon from '@mui/icons-material/Close'
 import Typography from '@mui/material/Typography'
 import { Box } from '@mui/material'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { UserContext } from '../../context/UserContext'
-import { addMovie } from '../../../firebase/providers'
+import { addMovie, removeMovie } from '../../../firebase/providers'
+import { Loading } from '../../ui/Loading'
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
@@ -53,19 +54,40 @@ BootstrapDialogTitle.propTypes = {
   onClose: PropTypes.func.isRequired
 }
 
-export default function CardDialog ({ open, handleClose, movie, setTrigger }) {
+export default function CardDialog ({ open, handleClose, movie, setTrigger, viewed }) {
   const { uid, dispatch } = useContext(UserContext)
+  const [disable, setDisable] = useState(false)
 
   const handleViewed = async () => {
-    const { ok, msg, movies: result } = await addMovie(uid, movie.imdbID)
-    if (!ok) {
-      console.log('Error')
-      console.log(msg)
+    setDisable(true)
+    if (!viewed) {
+      const { ok, msg, movies: result } = await addMovie(uid, movie.imdbID)
+      if (!ok) {
+        console.log('Error')
+        console.log(msg)
+        setDisable(false)
+        handleClose()
+        return
+      }
+      dispatch({ type: 'loadMovies', payload: { result } })
+      setDisable(false)
+      setTrigger(true)
+      handleClose()
       return
     }
 
-    dispatch({ type: 'loadMovies', payload: { result } })
+    const { ok, msg, movies } = await removeMovie(uid, movie.imdbID)
+    if (!ok) {
+      console.log('Error')
+      console.log(msg)
+      setDisable(false)
+      handleClose()
+      return
+    }
+    dispatch({ type: 'loadMovies', payload: { movies } })
+    setDisable(false)
     setTrigger(true)
+    handleClose()
   }
 
   return (
@@ -120,17 +142,19 @@ export default function CardDialog ({ open, handleClose, movie, setTrigger }) {
         </DialogContent>
         <DialogActions >
           <Button onClick={() => handleViewed(movie.imdbID)} sx={{
-            color: '#caa20f'
-          }}>
-            Mark as viewed
+            color: `${viewed ? 'rgb(143, 20, 20)' : '#caa20f'}`
+          }} disabled={disable}>
+            {viewed ? 'Mark as not viewed' : 'Mark as viewed'}
           </Button>
           <Button autoFocus onClick={handleClose} sx={{
             color: 'black'
-          }}>
+          }}
+          >
             Close
           </Button>
         </DialogActions>
       </BootstrapDialog>
+      {disable && <Loading />}
     </>
   )
 }

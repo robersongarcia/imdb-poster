@@ -25,7 +25,7 @@
 
 ## Overview
 
-![screenshot](https://user-images.githubusercontent.com/16707738/92399059-5716eb00-f132-11ea-8b14-bcacdc8ec97b.png)
+![screenshot2](https://raw.githubusercontent.com/robersongarcia/imdb-poster/main/public/screenshot2.png)
 
 It is an application that allow the users to signup and login, and with their users, they can mark as viewed or not the movies from the top 100 movies bucket list by IMDb. Creating this app was a very good and fun experience meanwhile I learn things doing a useful product.
 

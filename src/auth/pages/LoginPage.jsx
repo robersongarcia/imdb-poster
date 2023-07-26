@@ -22,8 +22,7 @@ export function LoginPage () {
 
   const onSubmit = async (event) => {
     event.preventDefault()
-    const resp = await startSignInWithEmailAndPass(email, password, dispatch, enqueueSnackbar, closeSnackbar)
-    console.log(resp)
+    await startSignInWithEmailAndPass(email, password, dispatch, enqueueSnackbar, closeSnackbar)
     // enqueueSnackbar('message', {
     //   variant: 'success',
     //   anchorOrigin: {

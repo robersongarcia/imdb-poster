@@ -33,8 +33,7 @@ export function SignUpPage () {
   }
 
   return (
-    <Grid container flex justifyContent={'center'}>
-      <div className='background-form'></div>
+    <Grid container flex justifyContent={'center'} bgcolor={'#F1F3F4'} className='backgroundPattern'>
       <Grid item xs={11} sm={6} md={4} sx={{
         display: 'flex',
         justifyContent: 'center',
@@ -59,22 +58,21 @@ export function SignUpPage () {
         }>
           <Avatar
               alt='IMDb Logo'
-              src='/imdb-logo.png'
-              variant='rounded'
+              src='/imdb-logo2.png'
               sx={{
                 width: '6rem',
                 height: '6rem',
-                border: '1px solid #ccc'
+                border: '1px solid #ccc',
+                borderRadius: '10%'
               }}
             />
             <Typography sx={{
-              fontSize: '1.5rem',
-              fontFamily: 'Helvetica',
-              fontWeight: 'bold',
+              fontSize: '2rem',
+              fontWeight: '300',
               color: '#333',
               marginTop: '1rem'
             }} gutterBottom>
-              IMDb Posters
+              Poster
             </Typography>
             <form onSubmit={onSubmit} style={{
               width: '90%'

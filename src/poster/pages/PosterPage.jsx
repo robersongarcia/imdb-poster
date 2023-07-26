@@ -1,7 +1,7 @@
 import { Button, Grid, Paper, Typography } from '@mui/material'
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { UserContext } from '../../context/UserContext'
-import { startLoguot } from '../../context/Async'
+import { startLoadingMovies, startLoguot } from '../../context/Async'
 
 // import data from '../../data/movies_id.json'
 import dataMovies from '../../data/movies_data.json'
@@ -10,13 +10,19 @@ import MovieCard from './MovieCard'
 import { Logout } from '@mui/icons-material'
 
 export function PosterPage () {
-  const { dispatch, movies } = useContext(UserContext)
+  const { dispatch, movies, uid } = useContext(UserContext)
+  const [trigger, setTrigger] = useState(false)
 
   const logout = () => {
     startLoguot(dispatch)
   }
 
-  console.log({ movies })
+  useEffect(() => {
+    if (trigger) {
+      startLoadingMovies(uid, dispatch)
+      setTrigger(false)
+    }
+  }, [trigger])
 
   return (
     <Paper sx={{
@@ -51,8 +57,12 @@ export function PosterPage () {
               }}
             >TOP 100 MOVIES BUCKET LIST</Typography>
             </Grid>
-            <Typography>THE HIGUEST RATED <span style={{
-              fontWeight: 'bold'
+            <Typography className='hr-lines' sx={{
+              display: 'inline-block',
+              paddingLeft: '65px',
+              paddingRight: '65px'
+            }}>THE HIGUEST RATED <span style={{
+              fontWeight: 'bold', color: '#caa20f'
             }}>IMDb</span> CROWD FAVORITES</Typography>
 
           </Grid>
@@ -69,7 +79,7 @@ export function PosterPage () {
           }}>
             {
               dataMovies.map((movie, index) => (
-                <MovieCard key={movie.imdbID} movie={movie} index={index} userMovies={movies}/>
+                <MovieCard key={movie.imdbID} movie={movie} index={index} userMovies={movies} setTrigger={setTrigger} />
               ))
             }
           </Grid>

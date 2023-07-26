@@ -103,7 +103,6 @@ export const getMovies = async (uid, google = false, email = '') => {
     const docSnap = await getDoc(doc(FirebaseDB, 'users', uid))
 
     if (docSnap.exists()) {
-      console.log('Document data:', docSnap.data())
       return {
         ok: true,
         movies: docSnap.data().movies
@@ -123,11 +122,52 @@ export const getMovies = async (uid, google = false, email = '') => {
           movies: []
         }
       }
-      console.log('No such document!')
+      console.error('No such document!')
       return {
         ok: false,
         movies: []
       }
+    }
+  } catch (error) {
+    console.log(error)
+    return {
+      ok: false,
+      msg: error.message
+    }
+  }
+}
+
+export const addMovie = async (uid, movieId) => {
+  try {
+    const { ok, movies } = await getMovies(uid)
+
+    if (!ok) {
+      return {
+        ok: false,
+        msg: 'Error getting movies'
+      }
+    }
+
+    if (movies.includes(movieId)) {
+      return {
+        ok: false,
+        msg: 'Movie already added'
+      }
+    }
+
+    movies.push({
+      movieId,
+      watchedAt: new Date()
+    })
+
+    await setDoc(doc(FirebaseDB, 'users', uid), {
+      movies
+    }, { merge: true })
+
+    return {
+      ok: true,
+      msg: 'Movie added',
+      movies
     }
   } catch (error) {
     console.log(error)

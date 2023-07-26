@@ -35,6 +35,12 @@ export const UserReducer = (state, action) => {
     case 'setUser':
       return state
 
+    case 'loadMovies':
+      return {
+        ...state,
+        movies: action.payload.movies
+      }
+
     default:
       return state
   }

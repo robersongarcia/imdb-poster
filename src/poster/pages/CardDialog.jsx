@@ -9,6 +9,9 @@ import IconButton from '@mui/material/IconButton'
 import CloseIcon from '@mui/icons-material/Close'
 import Typography from '@mui/material/Typography'
 import { Box } from '@mui/material'
+import { useContext } from 'react'
+import { UserContext } from '../../context/UserContext'
+import { addMovie } from '../../../firebase/providers'
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
@@ -50,9 +53,19 @@ BootstrapDialogTitle.propTypes = {
   onClose: PropTypes.func.isRequired
 }
 
-export default function CardDialog ({ open, handleClose, movie }) {
-  const handleViewed = () => {
-    console.log('viewed')
+export default function CardDialog ({ open, handleClose, movie, setTrigger }) {
+  const { uid, dispatch } = useContext(UserContext)
+
+  const handleViewed = async () => {
+    const { ok, msg, movies: result } = await addMovie(uid, movie.imdbID)
+    if (!ok) {
+      console.log('Error')
+      console.log(msg)
+      return
+    }
+
+    dispatch({ type: 'loadMovies', payload: { result } })
+    setTrigger(true)
   }
 
   return (
@@ -106,10 +119,14 @@ export default function CardDialog ({ open, handleClose, movie }) {
           </Typography>
         </DialogContent>
         <DialogActions >
-          <Button onClick={() => handleViewed(movie.imdbID)} color='success'>
+          <Button onClick={() => handleViewed(movie.imdbID)} sx={{
+            color: '#caa20f'
+          }}>
             Mark as viewed
           </Button>
-          <Button autoFocus onClick={handleClose}>
+          <Button autoFocus onClick={handleClose} sx={{
+            color: 'black'
+          }}>
             Close
           </Button>
         </DialogActions>

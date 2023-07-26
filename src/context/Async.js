@@ -20,7 +20,6 @@ export const startSignInWithGoogle = async (dispatch) => {
     return
   }
 
-  //! TODO - check user movies in DB
   const { ok, movies } = await getMovies(result.uid, true, result.email)
   if (!ok) return dispatch({ type: 'logout', payload: 'no movies doc' })
 
@@ -34,7 +33,6 @@ export const startSignInWithEmailAndPass = async (email, password, dispatch) => 
 
   if (!ok1) return dispatch({ type: 'logout', payload: msg })
 
-  //! TODO - check user movies in DB
   const { ok, movies } = await getMovies(uid)
   if (!ok) return dispatch({ type: 'logout', payload: 'no movies doc' })
 
@@ -45,4 +43,10 @@ export const startLoguot = async (dispatch) => {
   await logoutFirebase()
 
   dispatch({ type: 'logout' })
+}
+
+export const startLoadingMovies = async (uid, dispatch) => {
+  const { ok, movies } = await getMovies(uid)
+  if (!ok) return dispatch({ type: 'logout', payload: 'no movies doc' })
+  return dispatch({ type: 'loadMovies', payload: { movies } })
 }

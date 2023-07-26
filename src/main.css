@@ -6,3 +6,33 @@ body {
     background: rgb(166,225,250);
     background: linear-gradient(0deg, rgba(166,225,250,1) 0%, rgba(14,107,168,1) 87%);
 }
+
+.hr-lines{
+    position: relative;
+    max-width: 500px;
+    text-align: center;
+    display: inline-block;
+  }
+  
+  .hr-lines:before{
+    content:" ";
+    height: 2px;
+    width: 60px;
+    background: #caa20f;
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 0;
+  }
+  
+  .hr-lines:after{
+    content:" ";
+    height: 2px;
+    width: 60px;
+    background: #caa20f;
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: 0;
+  }
+

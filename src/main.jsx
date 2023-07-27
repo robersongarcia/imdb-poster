@@ -12,7 +12,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   // <React.StrictMode>
   <AppTheme>
     <SnackbarProvider>
-    <BrowserRouter>
+    <BrowserRouter basename={import.meta.env.DEV ? '/' : '/react-vite-gh-pages/'}>
       <UserProvider>
         <PosterApp />
       </UserProvider>

@@ -7,7 +7,7 @@ import { getFirestore } from 'firebase/firestore/lite'
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_API,
+  apiKey: 'AIzaSyAZ0kQd2n3KEvrnz7ZPvzMkp-6Q6IJ5t0g',
   authDomain: 'imdb-poster.firebaseapp.com',
   projectId: 'imdb-poster',
   storageBucket: 'imdb-poster.appspot.com',

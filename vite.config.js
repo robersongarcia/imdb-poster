@@ -6,12 +6,7 @@ import react from '@vitejs/plugin-react-swc'
 export default defineConfig(({ command }) => {
   const config = {
     plugins: [react()],
-    base: '/'
+    base: '/imdb-poster/'
   }
-
-  if (command !== 'serve') {
-    config.base = '/imdb-poster/'
-  }
-
   return config
 })

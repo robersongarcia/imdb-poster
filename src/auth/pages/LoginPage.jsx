@@ -70,7 +70,7 @@ export function LoginPage () {
         }>
             <Avatar
               alt='IMDb Logo'
-              src='/imdb-logo2.png'
+              src='./public/imdb-logo2.png'
               sx={{
                 width: '6rem',
                 height: '6rem',

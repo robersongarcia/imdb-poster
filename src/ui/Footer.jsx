@@ -6,7 +6,7 @@ export function Footer () {
     <Grid item
     sx={{
       width: '100%',
-      position: 'absolute',
+      position: 'relative',
       bottom: '0'
     }}
   >
